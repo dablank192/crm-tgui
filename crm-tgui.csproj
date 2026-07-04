@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>crm_tgui</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
+    <PackageReference Include="Terminal.Gui" Version="2.4.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Dto\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+
+</Project>

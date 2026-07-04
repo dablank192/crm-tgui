@@ -1,0 +1,36 @@
+using System;
+using crm_tgui.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace crm_tgui.Extension;
+
+public static class ServiceCollection
+{
+    public static void Service(this IServiceCollection collection)
+    {
+
+        //Create Db Path
+        var folder = Environment.SpecialFolder.LocalApplicationData;
+        var path = Environment.GetFolderPath(folder);
+        var appPath = Path.Combine(path, "crm-tgui");
+
+        if (!Directory.Exists(appPath))
+        {
+            Directory.CreateDirectory(appPath);
+        }
+
+        var dbPath = Path.Combine(appPath, "crm-tgui.db");
+
+
+        //register db context
+        collection.AddDbContextFactory<AppDbContext>(option =>
+        {
+            option.UseSqlite(dbPath);
+        });
+
+
+        //register service
+        
+    }
+}
