@@ -7,5 +7,5 @@ public record CustomerBaseDto(
     string FirstName,
     string MiddleName,
     string LastName,
-    int NationalId
+    string NationalId
 );

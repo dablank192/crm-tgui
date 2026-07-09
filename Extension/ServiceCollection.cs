@@ -1,6 +1,7 @@
 using System;
 using crm_tgui.Infrastructure;
 using crm_tgui.Repositories;
+using crm_tgui.Service;
 using crm_tgui.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,9 +36,11 @@ public static class ServiceCollectionExtension
         //register service
         collection.AddTransient<IUnitOfWork, UnitOfWork>();
         collection.AddTransient<ICustomerRepo, CustomerRepo>();
+        collection.AddTransient<ICustomerService, CustomerService>();
 
 
         //register view
         collection.AddTransient<Landing>();
+        collection.AddTransient<AddCustomer>();
     }
 }

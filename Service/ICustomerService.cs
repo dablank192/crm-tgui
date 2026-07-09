@@ -8,7 +8,7 @@ public interface ICustomerService
 {
     Task<List<CustomerEntities>> GetAllCustomer();
     Task<CustomerEntities> GetACustomer(Guid Id);
-    Task<string> AddCustomer (string firstName, string lastName, int nationalId, string? middleName = null);
+    Task<string> AddCustomer (CustomerBaseDto customerInfo);
     Task<string> UpdateCustomer (Guid Id, CustomerBaseDto customerInfo);
     Task<string> DeleteCustomer (Guid Id);
 }

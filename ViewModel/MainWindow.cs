@@ -22,6 +22,7 @@ public class MainWindow : Window
             new MenuBarItem(Title = "Menu", new MenuItem[]
             {
                 new MenuItem("Home", "", () => NavigateTo<Landing>()),
+                new MenuItem("New Customer", "", () => NavigateTo<AddCustomer>()),
                 new MenuItem("Exit", "", () => Application.RequestStop())
             })
         });
@@ -33,7 +34,8 @@ public class MainWindow : Window
             X = 0,
             Y = 1,
             Width = Dim.Fill(),
-            Height = Dim.Fill()
+            Height = Dim.Fill(),
+            CanFocus = true
         };
 
         Add(_contentContainer);
@@ -60,6 +62,7 @@ public class MainWindow : Window
         _currentView.Height = Dim.Fill();
 
         _contentContainer.Add(_currentView);
+        _currentView.SetFocus();
     }
 
     public void NavigateTo<T>() where T : View

@@ -15,13 +15,13 @@ public class CustomerEntities
     public string FirstName {get; private set;}
     public string? MiddleName {get; private set;}
     public string LastName {get; private set;}
-    public int NationalId {get; private set;}
+    public string? NationalId {get; private set;}
     public string Status {get; set;}
     public DateTime CreatedAt {get; set;}
     
     protected CustomerEntities() {}
     
-    public CustomerEntities(string firstName, string lastName, int nationalId, string? middleName = null) 
+    public CustomerEntities(string firstName, string lastName, string nationalId, string? middleName = null) 
     {
         if (string.IsNullOrEmpty(firstName) | string.IsNullOrEmpty(lastName))
         {
@@ -33,7 +33,9 @@ public class CustomerEntities
             MiddleName = middleName;
         }
 
-        if(nationalId <= 10) throw new Exception("National ID can not be less than 10 digit number");
+        int.TryParse(nationalId, out int customerId);
+
+        if(customerId <= 10) throw new Exception("National ID can not be less than 10 digit number");
 
         CustomerId = Random.Shared.Next(100000, 1000000);
         FirstName = firstName;
@@ -43,9 +45,10 @@ public class CustomerEntities
         CreatedAt = DateTime.UtcNow;
     }
 
-    public void ChangeNationalId (int newNationalId)
+    public void ChangeNationalId (string newNationalId)
     {
-        if(newNationalId <= 10) throw new Exception("National ID can not be less than 10 digit number");
+        int.TryParse(newNationalId, out int customerId);
+        if(customerId <= 10) throw new Exception("National ID can not be less than 10 digit number");
 
         NationalId = newNationalId;
     }

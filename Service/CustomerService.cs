@@ -25,13 +25,13 @@ public class CustomerService(
         return customer;
     }
 
-    public async Task<string> AddCustomer(string firstName, string lastName, int nationalId, string? middleName = null)
+    public async Task<string> AddCustomer(CustomerBaseDto customerInfo)
     {
         var newCustomer = new CustomerEntities(
-            firstName: firstName,
-            lastName: lastName,
-            middleName: middleName,
-            nationalId: nationalId
+            firstName: customerInfo.FirstName,
+            lastName: customerInfo.LastName,
+            middleName: customerInfo.MiddleName ?? "",
+            nationalId: customerInfo.NationalId
         );
 
         await customerRepo.AddCustomer(newCustomer);
