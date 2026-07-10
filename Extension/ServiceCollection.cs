@@ -41,6 +41,6 @@ public static class ServiceCollectionExtension
 
         //register view
         collection.AddTransient<Landing>();
-        collection.AddTransient<AddCustomer>();
+        collection.AddTransient<AddCustomerView>();
     }
 }
