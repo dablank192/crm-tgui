@@ -5,6 +5,7 @@ using crm_tgui.Service;
 using crm_tgui.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace crm_tgui.Extension;
 
@@ -12,24 +13,25 @@ public static class ServiceCollectionExtension
 {
     public static void Service(this IServiceCollection collection)
     {
-
-        //Create Db Path
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        var appPath = Path.Combine(path, "crm-tgui");
-
-        if (!Directory.Exists(appPath))
+        collection.AddLogging(builder =>
         {
-            Directory.CreateDirectory(appPath);
-        }
-
-        var dbPath = Path.Combine(appPath, "crm-tgui.db");
+            builder.ClearProviders();
+            builder.AddDebug();
+        });
+        
+        
+        //Create Db Path
+        var dbPath = PathHelper.GetPath();
 
 
         //register db context
         collection.AddDbContextFactory<AppDbContext>(option =>
         {
-            option.UseSqlite(dbPath);
+            option.UseSqlite($"DataSource={dbPath}");
+            option.LogTo(
+                message => System.Diagnostics.Debug.WriteLine(message),
+                Microsoft.Extensions.Logging.LogLevel.Information
+            );
         });
 
 

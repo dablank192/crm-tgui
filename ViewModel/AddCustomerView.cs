@@ -8,13 +8,94 @@
 //  </auto-generated>
 // -----------------------------------------------------------------------------
 namespace crm_tgui.ViewModel {
+    using crm_tgui.Domain.Entities;
+    using crm_tgui.Dto;
+    using crm_tgui.Service;
     using Terminal.Gui;
-    
-    
-    public partial class AddCustomerView {
-        
-        public AddCustomerView() {
+    using Terminal.Gui.App;
+    using Terminal.Gui.Views;
+
+    public partial class AddCustomerView
+    {    
+        private readonly ICustomerService _customerService;
+
+        public AddCustomerView(ICustomerService customerService)
+        {
+            _customerService = customerService;
+
             InitializeComponent();
+
+            this.MouseEnter += (s, e) => this.txtFirstName.SetFocus();
+
+            this.btnSubmit.Accepting += async (s, e) => await OnClickAsync();
+        }
+
+        public async Task OnClickAsync()
+        {
+            var firstName = txtFirstName.Text.ToString().Trim() ?? "";
+            var middleName = txtMiddleName.Text.ToString().Trim() ?? "";
+            var lastName = txtLastName.Text.ToString().Trim() ?? "";
+            var nationalId = txtNationalId.Text.ToString().Trim() ?? "";
+
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+            {
+                MessageBox.ErrorQuery(
+                    Application.Instance,
+                    title: "ERROR",
+                    message: "Missing required field"
+                );
+                return;
+            }
+
+            btnSubmit.Enabled = false;
+            btnSubmit.Text = "Loading...";
+
+            var newCustomer = new CustomerBaseDto(
+                FirstName: firstName,
+                MiddleName: middleName,
+                LastName: lastName,
+                NationalId: nationalId
+            );
+
+            await Task.Run(() => SubmitAsync(newCustomer));
+        }
+
+        public async Task SubmitAsync(CustomerBaseDto customerInfo)
+        {
+            try
+            {
+                await _customerService.AddCustomer(customerInfo);
+                
+                MessageBox.Query(
+                    Application.Instance,
+                    title: "SUCCESS",
+                    message: "Customer added successfully",
+                    buttons: "OK"
+                );
+
+                this.txtFirstName.Text = "";
+                this.txtMiddleName.Text = "";
+                this.txtLastName.Text = "";
+                this.txtNationalId.Text = "";
+
+                this.btnSubmit.Enabled = true;
+                btnSubmit.Text = "Submit";
+
+                this.txtFirstName.SetFocus();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Query(
+                    Application.Instance,
+                    title: "ERROR",
+                    message: $"An unknown error has occur:{ex}",
+                    buttons: "OK"
+                );
+
+                btnSubmit.Enabled = true;
+                btnSubmit.Text = "Submit";
+            }
+            
         }
     }
 }

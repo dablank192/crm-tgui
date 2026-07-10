@@ -40,13 +40,13 @@ namespace crm_tgui.ViewModel {
         
         private Terminal.Gui.Views.Label lblNationalId;
         
-        private Terminal.Gui.Views.TextField txtLastName2;
+        private Terminal.Gui.Views.TextField txtNationalId;
         
         private Terminal.Gui.Views.Button btnSubmit;
         
         private void InitializeComponent() {
             this.btnSubmit = new Terminal.Gui.Views.Button();
-            this.txtLastName2 = new Terminal.Gui.Views.TextField();
+            this.txtNationalId = new Terminal.Gui.Views.TextField();
             this.lblNationalId = new Terminal.Gui.Views.Label();
             this.txtLastName = new Terminal.Gui.Views.TextField();
             this.lblLastName = new Terminal.Gui.Views.Label();
@@ -157,18 +157,18 @@ namespace crm_tgui.ViewModel {
             this.lblNationalId.Text = "National Id:";
             this.lblNationalId.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
             this.frameView.Add(this.lblNationalId);
-            this.txtLastName2.Width = 49;
-            this.txtLastName2.Height = 1;
-            this.txtLastName2.X = 17;
-            this.txtLastName2.Y = 11;
-            this.txtLastName2.Visible = true;
-            this.txtLastName2.CanFocus = true;
-            this.txtLastName2.ShadowStyle = null;
-            this.txtLastName2.Secret = false;
-            this.txtLastName2.Data = "txtLastName2";
-            this.txtLastName2.Text = "";
-            this.txtLastName2.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
-            this.frameView.Add(this.txtLastName2);
+            this.txtNationalId.Width = 49;
+            this.txtNationalId.Height = 1;
+            this.txtNationalId.X = 17;
+            this.txtNationalId.Y = 11;
+            this.txtNationalId.Visible = true;
+            this.txtNationalId.CanFocus = true;
+            this.txtNationalId.ShadowStyle = null;
+            this.txtNationalId.Secret = false;
+            this.txtNationalId.Data = "txtNationalId";
+            this.txtNationalId.Text = "";
+            this.txtNationalId.TextAlignment = Terminal.Gui.ViewBase.Alignment.Start;
+            this.frameView.Add(this.txtNationalId);
             this.btnSubmit.Width = Dim.Auto();
             this.btnSubmit.Height = Dim.Auto();
             this.btnSubmit.X = Pos.Center();

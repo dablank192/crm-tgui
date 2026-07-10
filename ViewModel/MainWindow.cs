@@ -22,7 +22,7 @@ public class MainWindow : Window
             new MenuBarItem(Title = "Menu", new MenuItem[]
             {
                 new MenuItem("Home", "", () => NavigateTo<Landing>()),
-                new MenuItem("New Customer", "", () => NavigateTo<AddCustomer>()),
+                new MenuItem("New Customer", "", () => NavigateTo<AddCustomerView>()),
                 new MenuItem("Exit", "", () => Application.RequestStop())
             })
         });
